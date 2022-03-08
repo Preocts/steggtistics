@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from steggtistics.model.header_details import LastResponse
+from steggtistics.model.header_details import HeaderDetails
 
 MOCK_HEADER: dict[str, str] = {
     "Server": "GitHub.com",
@@ -48,7 +48,7 @@ class NotFound:
 
 
 def test_build_from_response() -> None:
-    lresp = LastResponse.build_from(MOCK_HEADER)
+    lresp = HeaderDetails.build_from(MOCK_HEADER)
 
     for key, value in EXPECTED.items():
         assert getattr(lresp, key, NotFound) == value, f"{key}, {value}"
