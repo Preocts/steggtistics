@@ -5,6 +5,7 @@ black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://gith
 status](https://results.pre-commit.ci/badge/github/Preocts/steggtistics/main.svg)](https://results.pre-commit.ci/latest/github/Preocts/steggtistics/main)
 [![Python
 package](https://github.com/Preocts/steggtistics/actions/workflows/python-tests.yml/badge.svg?branch=main)](https://github.com/Preocts/steggtistics/actions/workflows/python-tests.yml)
+[![codecov](https://codecov.io/gh/Preocts/steggtistics/branch/main/graph/badge.svg?token=kAJ2D32DFA)](https://codecov.io/gh/Preocts/steggtistics)
 
 # st**egg**tistics
 
