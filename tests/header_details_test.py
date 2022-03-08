@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from steggtistics.model.last_response import LastResponse
+from steggtistics.model.header_details import LastResponse
 
 MOCK_HEADER: dict[str, str] = {
     "Server": "GitHub.com",

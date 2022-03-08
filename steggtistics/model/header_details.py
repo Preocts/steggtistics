@@ -4,7 +4,7 @@ import re
 from datetime import datetime
 
 
-class LastResponse:
+class HeaderDetails:
     next: str | None
     prev: str | None
     last: str | None
@@ -13,7 +13,7 @@ class LastResponse:
     rate_reset: datetime
 
     @classmethod
-    def build_from(cls, httpdict: dict[str, str]) -> LastResponse:
+    def build_from(cls, httpdict: dict[str, str]) -> HeaderDetails:
         """Build model from HTTP response"""
         newobj = cls()
         newobj.next = cls._extract_next(httpdict["Link"], "next")
