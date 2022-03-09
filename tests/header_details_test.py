@@ -51,6 +51,11 @@ class NotFound:
     ...
 
 
+@pytest.fixture
+def mock_header() -> HeaderDetails:
+    return HeaderDetails.build_from(MOCK_HEADER)
+
+
 @pytest.mark.parametrize(
     ("attr", "expected"),
     (
@@ -63,7 +68,9 @@ class NotFound:
         ("rate_reset", datetime.fromtimestamp(1646708508)),
     ),
 )
-def test_build_from_response(attr: str, expected: Any) -> None:
-    lresp = HeaderDetails.build_from(MOCK_HEADER)
-
-    assert getattr(lresp, attr, NotFound) == expected
+def test_build_from_response(
+    attr: str,
+    expected: Any,
+    mock_header: HeaderDetails,
+) -> None:
+    assert getattr(mock_header, attr, NotFound) == expected
