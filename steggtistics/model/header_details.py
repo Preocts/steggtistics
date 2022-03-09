@@ -9,6 +9,7 @@ class HeaderDetails:
     prev: str | None
     last: str | None
     first: str | None
+    total: int
     remaining: int
     rate_reset: datetime
 
@@ -20,6 +21,7 @@ class HeaderDetails:
         newobj.prev = cls._extract_next(httpdict["Link"], "prev")
         newobj.last = cls._extract_next(httpdict["Link"], "last")
         newobj.first = cls._extract_next(httpdict["Link"], "first")
+        newobj.total = cls._extract_total(newobj.last)
         newobj.remaining = int(httpdict["X-RateLimit-Remaining"])
         newobj.rate_reset = datetime.fromtimestamp(float(httpdict["X-RateLimit-Reset"]))
 
@@ -34,3 +36,10 @@ class HeaderDetails:
             if match:
                 return match.group(1)
         return None
+
+    @staticmethod
+    def _extract_total(last: str | None) -> int:
+        """internal: extract total pages from last link or return 0"""
+        pattern = r"(?<!per_)page=(\d+)"
+        match = re.search(pattern, last or "")
+        return int(match.group(1)) if match else 0
