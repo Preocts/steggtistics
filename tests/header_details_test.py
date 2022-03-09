@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 from datetime import datetime
+from typing import Any
+
+import pytest
 
 from steggtistics.model.header_details import HeaderDetails
 
@@ -37,6 +40,7 @@ EXPECTED = {
     "next": "https://api.github.com/user/13407322/events?per_page=10&page=3",
     "prev": "https://api.github.com/user/13407322/events?per_page=10&page=1",
     "last": "https://api.github.com/user/13407322/events?per_page=10&page=30",
+    "total": 30,
     "first": None,
     "remaining": 52,
     "rate_reset": datetime.fromtimestamp(1646708508),
@@ -47,8 +51,19 @@ class NotFound:
     ...
 
 
-def test_build_from_response() -> None:
+@pytest.mark.parametrize(
+    ("attr", "expected"),
+    (
+        ("next", "https://api.github.com/user/13407322/events?per_page=10&page=3"),
+        ("prev", "https://api.github.com/user/13407322/events?per_page=10&page=1"),
+        ("last", "https://api.github.com/user/13407322/events?per_page=10&page=30"),
+        ("total", 30),
+        ("first", None),
+        ("remaining", 52),
+        ("rate_reset", datetime.fromtimestamp(1646708508)),
+    ),
+)
+def test_build_from_response(attr: str, expected: Any) -> None:
     lresp = HeaderDetails.build_from(MOCK_HEADER)
 
-    for key, value in EXPECTED.items():
-        assert getattr(lresp, key, NotFound) == value, f"{key}, {value}"
+    assert getattr(lresp, attr, NotFound) == expected
