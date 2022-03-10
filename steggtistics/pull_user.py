@@ -49,13 +49,3 @@ class PullUser:
         if not self._last_headers.remaining:
             self.log.warning("Rate limit reached.")
         return not self._last_headers.remaining
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level="INFO")
-    from pathlib import Path
-    import json
-
-    pulluser = PullUser()
-
-    json.dump(pulluser.pull("Preocts"), Path("output.json").open("w"), indent=4)
