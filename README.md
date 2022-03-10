@@ -9,7 +9,7 @@ package](https://github.com/Preocts/steggtistics/actions/workflows/python-tests.
 
 # st**egg**tistics
 
-rooHappy
+Pull from the `{user}/events` public API of GitHub.
 
 ### Requirements
 
@@ -18,3 +18,22 @@ rooHappy
 ## Internal Links
 
 - [Development Installation Guide](docs/development.md)
+
+
+---
+
+WIP - output to be parsed for metrics
+
+```py
+import json
+from pathlib import Path
+from datetime import datetime
+
+from steggtistics.pull_user import PullUser
+
+save_file = Path(f"temp_{datetime.now().strftime('%Y.%m.%d')}_events.json")
+
+results = PullUser().pull_events("[USERNAME]")
+
+json.dump([r.asdict() for r in results], save_file.open("w"), indent=4)
+```
