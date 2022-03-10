@@ -27,3 +27,14 @@ class Event:
         newobj.repo_url = event_data["repo"]["url"]
 
         return newobj
+
+    def asdict(self) -> dict[str, Any]:
+        """Returns object as a dict"""
+        return {
+            "id": self.id,
+            "type": self.type,
+            "public": self.public,
+            "created_at": self.created_at,
+            "repo_name": self.repo_name,
+            "repo_url": self.repo_url,
+        }

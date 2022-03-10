@@ -33,6 +33,15 @@ SAMPLE: dict[str, Any] = {
     "id": "12345",
 }
 
+EXPECTED_DICT = {
+    "id": "12345",
+    "type": "WatchEvent",
+    "public": False,
+    "created_at": "2011-09-06T17:26:27Z",
+    "repo_name": "octocat/Hello-World",
+    "repo_url": "https://api.github.com/repos/octocat/Hello-World",
+}
+
 
 @pytest.mark.parametrize(
     ("attr", "expected"),
@@ -49,3 +58,11 @@ def test_build_from(attr: str, expected: str) -> None:
     model = Event.build_from(SAMPLE)
 
     assert getattr(model, attr) == expected
+
+
+def test_asdict() -> None:
+    model = Event.build_from(SAMPLE)
+
+    result = model.asdict()
+
+    assert result == EXPECTED_DICT
