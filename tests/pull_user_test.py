@@ -7,6 +7,7 @@ import pytest
 
 from steggtistics.model.header_details import HeaderDetails
 from steggtistics.pull_user import PullUser
+from tests.event_test import SAMPLE as EVENT_SAMPLE
 from tests.header_details_test import MOCK_HEADER
 
 
@@ -82,3 +83,15 @@ def test_pull_user_rate_failed(mock_client: PullUser, caplog: Any) -> None:
         assert mocker.call_count == 1
 
     assert "Failed" in caplog.text
+
+
+def test_pull_events(mock_client: PullUser) -> None:
+    return_size = 100
+    return_body = [EVENT_SAMPLE for _ in range(return_size)]
+
+    with patch.object(mock_client, "pull", return_value=return_body):
+        results = mock_client.pull_events("mock_user")
+
+    assert len(results) == return_size
+    for result in results:
+        assert result.id == EVENT_SAMPLE["id"]

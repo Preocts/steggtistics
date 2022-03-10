@@ -8,6 +8,7 @@ from typing import Any
 
 from http_overeasy.http_client import HTTPClient
 
+from steggtistics.model.event import Event
 from steggtistics.model.header_details import HeaderDetails
 
 
@@ -17,7 +18,14 @@ class PullUser:
         self.http = HTTPClient(headers={"Accept": "application/vnd.github.v3+json"})
         self._last_headers = HeaderDetails()
 
-    def pull(self, username: str) -> Any:
+    def pull_events(self, username: str) -> list[Event]:
+        """Pull like of Events for given user"""
+        results = self.pull(username)
+
+        return [Event.build_from(result) for result in results]
+
+    def pull(self, username: str) -> list[dict[str, Any]]:
+        """Pull raw Event results for given user"""
         fullpull: list[dict[str, Any]] = []
         url = f"https://api.github.com/users/{username}/events?per_page=100&page=1"
 
