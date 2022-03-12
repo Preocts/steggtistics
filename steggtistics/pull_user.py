@@ -41,7 +41,7 @@ class PullUser:
                 break
 
             fullpull.extend(resp.get_json())
-            url = self._last_headers.next or ""
+            url = self._last_headers.next_url or ""
             if not url or self.is_rate_limited():
                 break
         return fullpull

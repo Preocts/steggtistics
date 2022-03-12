@@ -94,4 +94,4 @@ def test_pull_events(mock_client: PullUser) -> None:
 
     assert len(results) == return_size
     for result in results:
-        assert result.id == EVENT_SAMPLE["id"]
+        assert result.id_ == EVENT_SAMPLE["id"]
