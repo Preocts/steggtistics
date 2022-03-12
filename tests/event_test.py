@@ -46,8 +46,8 @@ EXPECTED_DICT = {
 @pytest.mark.parametrize(
     ("attr", "expected"),
     (
-        ("id", SAMPLE["id"]),
-        ("type", SAMPLE["type"]),
+        ("id_", SAMPLE["id"]),
+        ("type_", SAMPLE["type"]),
         ("public", SAMPLE["public"]),
         ("created_at", SAMPLE["created_at"]),
         ("repo_name", SAMPLE["repo"]["name"]),

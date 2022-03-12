@@ -59,11 +59,11 @@ def mock_header() -> HeaderDetails:
 @pytest.mark.parametrize(
     ("attr", "expected"),
     (
-        ("next", "https://api.github.com/user/13407322/events?per_page=10&page=3"),
-        ("prev", "https://api.github.com/user/13407322/events?per_page=10&page=1"),
-        ("last", "https://api.github.com/user/13407322/events?per_page=10&page=30"),
+        ("next_url", "https://api.github.com/user/13407322/events?per_page=10&page=3"),
+        ("prev_url", "https://api.github.com/user/13407322/events?per_page=10&page=1"),
+        ("last_url", "https://api.github.com/user/13407322/events?per_page=10&page=30"),
         ("total", 30),
-        ("first", None),
+        ("first_url", None),
         ("remaining", 52),
         ("rate_reset", datetime.fromtimestamp(1646708508)),
     ),
