@@ -15,7 +15,7 @@ class Event:
     repo_url: str
 
     @classmethod
-    def build_from(cls, event_data: dict[str, Any]) -> Event:
+    def build_from_api(cls, event_data: dict[str, Any]) -> Event:
         """Build model using event object from Events API."""
         newobj = cls()
         newobj.id_ = event_data["id"]
@@ -25,6 +25,26 @@ class Event:
         newobj.repo_name = event_data["repo"]["name"]
         newobj.repo_url = event_data["repo"]["url"]
 
+        return newobj
+
+    @classmethod
+    def build_from_row(
+        cls,
+        id_: str,
+        type_: str,
+        public: bool,
+        created_at: str,
+        repo_name: str,
+        repo_url: str,
+    ) -> Event:
+        """Build model using event object from Events API."""
+        newobj = cls()
+        newobj.id_ = id_
+        newobj.type_ = type_
+        newobj.public = public
+        newobj.created_at = created_at
+        newobj.repo_name = repo_name
+        newobj.repo_url = repo_url
         return newobj
 
     def asdict(self) -> dict[str, Any]:

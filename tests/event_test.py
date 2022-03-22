@@ -54,15 +54,24 @@ EXPECTED_DICT = {
         ("repo_url", SAMPLE["repo"]["url"]),
     ),
 )
-def test_build_from(attr: str, expected: str) -> None:
-    model = Event.build_from(SAMPLE)
+def test_build_from_api(attr: str, expected: str) -> None:
+    model = Event.build_from_api(SAMPLE)
 
     assert getattr(model, attr) == expected
 
 
 def test_asdict() -> None:
-    model = Event.build_from(SAMPLE)
+    model = Event.build_from_api(SAMPLE)
 
     result = model.asdict()
 
     assert result == EXPECTED_DICT
+
+
+def test_build_from_table() -> None:
+    row: list[Any] = [value for value in EXPECTED_DICT.values()]
+
+    result = Event.build_from_row(*row)
+    verify = result.asdict()
+
+    assert verify == EXPECTED_DICT

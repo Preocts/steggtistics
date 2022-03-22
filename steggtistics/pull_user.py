@@ -24,7 +24,7 @@ class PullUser:
         """Pull like of Events for given user."""
         results = self.pull(username)
 
-        return [Event.build_from(result) for result in results]
+        return [Event.build_from_api(result) for result in results]
 
     def pull(self, username: str) -> list[dict[str, Any]]:
         """Pull raw Event results for given user."""
