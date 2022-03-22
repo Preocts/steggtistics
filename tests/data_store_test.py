@@ -31,6 +31,7 @@ def store() -> Generator[DataStore, None, None]:
         yield datastore
 
     finally:
+        datastore._db.close()
         os.remove(path)
 
 
