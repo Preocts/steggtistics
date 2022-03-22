@@ -27,6 +27,26 @@ class Event:
 
         return newobj
 
+    @classmethod
+    def build_from_row(
+        cls,
+        id_: str,
+        type_: str,
+        public: bool,
+        created_at: str,
+        repo_name: str,
+        repo_url: str,
+    ) -> Event:
+        """Build model using event object from Events API."""
+        newobj = cls()
+        newobj.id_ = id_
+        newobj.type_ = type_
+        newobj.public = public
+        newobj.created_at = created_at
+        newobj.repo_name = repo_name
+        newobj.repo_url = repo_url
+        return newobj
+
     def asdict(self) -> dict[str, Any]:
         """Return object as a dict."""
         return {

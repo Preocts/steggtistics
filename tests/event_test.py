@@ -66,3 +66,12 @@ def test_asdict() -> None:
     result = model.asdict()
 
     assert result == EXPECTED_DICT
+
+
+def test_build_from_table() -> None:
+    row: list[Any] = [value for value in EXPECTED_DICT.values()]
+
+    result = Event.build_from_row(*row)
+    verify = result.asdict()
+
+    assert verify == EXPECTED_DICT
