@@ -15,7 +15,7 @@ class Event:
     repo_url: str
 
     @classmethod
-    def build_from(cls, event_data: dict[str, Any]) -> Event:
+    def build_from_api(cls, event_data: dict[str, Any]) -> Event:
         """Build model using event object from Events API."""
         newobj = cls()
         newobj.id_ = event_data["id"]
